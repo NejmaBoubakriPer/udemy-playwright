@@ -34,5 +34,34 @@ test.describe('Form Layouts page', () => {
     //generic assertion
     const statusRadio = await usingtheGriForm.getByRole('radio',{name:'Option 1'}).isChecked()
     expect(statusRadio).toBeTruthy()
+    // locator assertion
+    await expect(usingtheGriForm.getByRole('radio',{name:'Option 1'})).toBeChecked()
+
+    //Check the second option
+    await usingtheGriForm.getByRole('radio',{name:'Option 2'}).check({force:true})
+    await expect(usingtheGriForm.getByRole('radio',{name:'Option 2'})).toBeChecked()
+
+    expect(await usingtheGriForm.getByRole('radio',{name:'Option 1'}).isChecked()).toBeFalsy()
+
+
   })
+})
+
+
+  test('Check Box', async({page}) => {
+    await page.getByText('Modal & Overlays').click()
+    await page.getByText('Toastr').click()
+
+    //Check method check the status of the check box
+    await page.getByRole('checkbox', {name: 'Hide on click'}).uncheck({force:true})
+    await page.getByRole('checkbox', {name: 'Prevent arising of duplicate toast'}).check({force:true})
+
+
+    const allCheckBox = page.getByRole('checkbox')
+    for (const box of await allCheckBox.all()){
+      //await box.check({force: true})
+      //expect(await box.isChecked()).toBeTruthy()
+      await box.uncheck({force: true})
+      expect(await box.isChecked()).toBeFalsy()
+    }
 })
