@@ -26,4 +26,13 @@ test.describe('Form Layouts page', () => {
 
   })
 
+  test('Radio Button', async({page}) => {
+    const usingtheGriForm = page.locator('nb-card', {hasText: 'Using The Grid'})
+   // await usingtheGriForm.getByLabel('Option 1').check({force:true})
+    await usingtheGriForm.getByRole('radio',{name:'Option 1'}).check({force:true})
+
+    //generic assertion
+    const statusRadio = await usingtheGriForm.getByRole('radio',{name:'Option 1'}).isChecked()
+    expect(statusRadio).toBeTruthy()
+  })
 })
