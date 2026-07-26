@@ -65,3 +65,19 @@ test.describe('Form Layouts page', () => {
       expect(await box.isChecked()).toBeFalsy()
     }
 })
+
+  test('lists & dropdown', async({page}) => {
+    const dorpDownMenu = page.locator('ngx-header nb-select')
+    await dorpDownMenu.click()
+
+    page.getByRole('list') // when list has ul tag (the options also)
+    page.getByRole('listitem') // when list hast li tag (the options also)
+
+    //const listOfOptions = await page.locator('list').locator('nb-option')
+    const listOfOptions = page.locator('nb-option-list nb-option')
+    await expect(listOfOptions).toHaveText(['Light', 'Dark', ' Cosmic', ' Corporate'])
+    await listOfOptions.filter({hasText:'Cosmic'}).click()
+
+    const header = page.locator('nb-layout-header')
+    await expect(header).toHaveCSS('background-color','rgb(50, 50, 89)')
+    })
