@@ -81,3 +81,31 @@ test.describe('Form Layouts page', () => {
     const header = page.locator('nb-layout-header')
     await expect(header).toHaveCSS('background-color','rgb(50, 50, 89)')
     })
+
+  test('Tooltip', async({page}) => {
+    await page.getByText('Modal & Overlays').click()
+    await page.getByText('Tooltip').click()
+    await page.getByRole('button', {name: 'Top'}).hover()
+    await expect(page.locator('nb-tooltip')).toHaveText('This is a tooltip')
+    })
+
+    test('Dialogs', async({page}) => {
+    await page.getByText('Tables & Data').click()
+    await page.getByText('Smart Table').click()
+
+    page.on('dialog', dialog =>{
+      expect(dialog.message()).toEqual('Are you sure you want to delete?')
+      dialog.accept()
+    })
+    await page.locator('tr', {hasText: 'mdo@gmail.com'}).locator('.nb-trash').click()
+    await expect(page.locator('tr', {hasText: 'mdo@gmail.com'})).not.toBeVisible()
+    })
+
+
+    test('Tables', async({page}) => {
+    await page.getByText('Tables & Data').click()
+    await page.getByText('Smart Table').click()
+
+    // how to select a raw by any visible text
+
+    })
