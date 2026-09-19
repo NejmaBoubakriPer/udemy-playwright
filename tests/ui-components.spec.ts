@@ -1,4 +1,5 @@
 import test, { expect } from '@playwright/test'
+import { Row } from 'ng2-smart-table/lib/lib/data-set/row'
 import { delay } from 'rxjs-compat/operator/delay'
 
 test.beforeEach('Before all Test Suits',async ({page}) => {
@@ -107,5 +108,15 @@ test.describe('Form Layouts page', () => {
     await page.getByText('Smart Table').click()
 
     // how to select a raw by any visible text
+    const tableRowByEmail = page.getByRole('row', {name: 'twitter@outlook.com'})
+    await tableRowByEmail.locator('.nb-edit').click()
+
+    await expect(tableRowByEmail.locator('.nb-checkmark')).toBeVisible()
+    await tableRowByEmail.getByPlaceholder('Age').fill('30')
+    await tableRowByEmail.locator('.nb-checkmark').click()
+    await expect(tableRowByEmail.locator('td').last()).toHaveText('30')
+
+     // how to select a raw by specific colum value
+    //const tableRowByID = page.getByRole('row').filter({has})
 
     })
