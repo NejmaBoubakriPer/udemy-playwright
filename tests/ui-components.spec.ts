@@ -110,13 +110,17 @@ test.describe('Form Layouts page', () => {
     // how to select a raw by any visible text
     const tableRowByEmail = page.getByRole('row', {name: 'twitter@outlook.com'})
     await tableRowByEmail.locator('.nb-edit').click()
-
     await expect(tableRowByEmail.locator('.nb-checkmark')).toBeVisible()
     await tableRowByEmail.getByPlaceholder('Age').fill('30')
     await tableRowByEmail.locator('.nb-checkmark').click()
     await expect(tableRowByEmail.locator('td').last()).toHaveText('30')
 
      // how to select a raw by specific colum value
-    //const tableRowByID = page.getByRole('row').filter({has})
+    const tableRowByID = page.getByRole('row').filter({has: page.getByRole('cell').nth(1).getByText('10')})
+    await tableRowByID.locator('.nb-edit').click()
+    await expect(page.locator('tbody').getByPlaceholder('E-mail')).toBeVisible()
+    await page.locator('tbody').getByPlaceholder('E-mail').fill('test@test.com')
+    await page.locator('tbody').locator('.nb-checkmark').click()
+    await expect(tableRowByID.locator('td').nth(5)).toHaveText('test@test.com')
 
     })
