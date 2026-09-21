@@ -123,4 +123,49 @@ test.describe('Form Layouts page', () => {
     await page.locator('tbody').locator('.nb-checkmark').click()
     await expect(tableRowByID.locator('td').nth(5)).toHaveText('test@test.com')
 
+    //loop through table rows
+    const ages = ['20', '30', '40', '200']
+
+    for (let age of ages){
+      await page.getByPlaceholder('Age').fill(age)
+      if (age == '200'){
+        await expect (page.locator('tbody')).toContainText('No data found')
+      }
+      else{
+        await expect(page.locator('tbody tr').first().locator('td').last()).toHaveText(age)
+        const allTableRows = await page.locator('tbody tr').all()
+        for (let row of allTableRows){
+          await expect (row.locator('td').last()).toHaveText(age)
+        }
+      }
+    }
+
     })
+
+
+      test('Datepicker', async({page}) => {
+    await page.getByText('Forms').click()
+    await page.getByText('Datepicker').click()
+    const calenderInputField = page.getByPlaceholder('Form Picker')
+    await calenderInputField.click()
+
+    const date = new Date()
+    date.setDate(date.getDate() + 300)
+    const expectedDate = date.getDate().toString()
+    const expectedMonth = date.toLocaleDateString('EN-US', {month:'short'})
+    const expectedMonthLong = date.toLocaleDateString('EN-US', {month:'long'})
+
+    const expectedYear = date.getFullYear()
+
+    let currentMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
+    const expectedMonthAndYear = `${expectedMonthLong} ${expectedYear}`
+    while (!currentMonthAndYear?.includes(expectedMonthAndYear)){
+      await page.locator('.next-month').click()
+      currentMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
+    }
+
+
+    const expectedFinalDate = `${expectedMonth} ${expectedDate}, ${expectedYear}`
+    await page.locator('.day-cell:not(.bounding-month)').getByText(expectedDate,{exact: true}).click()
+    await expect(calenderInputField).toHaveValue(expectedFinalDate)
+     })
