@@ -199,5 +199,13 @@ test.describe('Form Layouts page', () => {
     await page.getByText('Modal & Overlays').click()
     await page.getByText('Dialog').click()
 
-    await page.getByRole('button', {name: 'Open Dialog with esc close'}).click()
+    const frameLocator = page.frameLocator('[data-cy="esc-close-iframe"]')
+    await frameLocator.getByRole('button', {name: 'Open Dialog with esc close'}).click()
     })
+
+    test('Drag and Drop', async({page}) => {
+    await page.getByText('Extra Components').click()
+    await page.getByText('Drag & Drop').click()
+    await page.getByText(' Get groceries ').dragTo(page.locator('#drop-list'))
+
+     })
