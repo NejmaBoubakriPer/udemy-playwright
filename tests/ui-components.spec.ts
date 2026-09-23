@@ -1,9 +1,7 @@
 import test, { expect } from '@playwright/test'
-import { Row } from 'ng2-smart-table/lib/lib/data-set/row'
-import { delay } from 'rxjs-compat/operator/delay'
 
 test.beforeEach('Before all Test Suits',async ({page}) => {
-  await page.goto('http://localhost:4200/')
+  await page.goto('https://playground.bondaracademy.com')
 })
 
 test.describe('Form Layouts page', () => {
@@ -169,3 +167,37 @@ test.describe('Form Layouts page', () => {
     await page.locator('.day-cell:not(.bounding-month)').getByText(expectedDate,{exact: true}).click()
     await expect(calenderInputField).toHaveValue(expectedFinalDate)
      })
+
+     test('Sliders', async({page}) => {
+      const tempBox = page.locator('[tabtitle="Temperature"] ngx-temperature-dragger')
+
+      //Setting the attribute value
+      const tempGauge = tempBox.locator('circle')
+      await tempGauge.evaluate(element => {
+        element.setAttribute('cx','9.403')
+        element.setAttribute('cy','150.278')
+      })
+      await tempGauge.click()
+      await expect(tempBox).toContainText('15')
+
+
+      //Use mouse movement
+      await tempBox.scrollIntoViewIfNeeded()
+      const box = await tempBox.boundingBox()
+      const x = box?.x + box?.width / 2
+      const y = box?.y + box?.height / 2
+      await page.mouse.move(x,y)
+      await page.mouse.down()
+      await page.mouse.move(x+100, y)
+      await page.mouse.move(x+100, y+100)
+      await page.mouse.up()
+      await expect(tempBox).toContainText('30')
+
+       })
+
+    test('iFrames', async({page}) => {
+    await page.getByText('Modal & Overlays').click()
+    await page.getByText('Dialog').click()
+
+    await page.getByRole('button', {name: 'Open Dialog with esc close'}).click()
+    })

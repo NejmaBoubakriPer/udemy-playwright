@@ -1,7 +1,7 @@
 import test from '@playwright/test'
 
 test.beforeEach('Before all Test Suits',async ({page}) => {
-  await page.goto('http://localhost:4200/')
+  await page.goto('https://playground.bondaracademy.com')
 })
 test.describe('First test suit Suit1', () => {
   test.beforeEach('before each test from Suit1', async({page})=>{
