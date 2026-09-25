@@ -1,5 +1,4 @@
 import test, { expect } from '@playwright/test'
-
 test.beforeEach('Before all Test Suits',async ({page}) => {
   await page.goto('https://playground.bondaracademy.com')
 })
@@ -206,6 +205,14 @@ test.describe('Form Layouts page', () => {
     test('Drag and Drop', async({page}) => {
     await page.getByText('Extra Components').click()
     await page.getByText('Drag & Drop').click()
+
+    //Option 1
     await page.getByText(' Get groceries ').dragTo(page.locator('#drop-list'))
+    //Option 2
+    await page.getByText(' Clean my room ').hover()
+    await page.mouse.down()
+    await page.locator('#drop-list').hover()
+    await page.mouse.up()
+
 
      })
