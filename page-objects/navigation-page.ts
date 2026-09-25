@@ -3,6 +3,9 @@ import { Locator, Page } from "@playwright/test";
 export class NavigationPage{
 
     private readonly page: Page
+    // This is the recommended style by playwrghit 
+    // Option 2 is to just declare here the page and the others inside the methods 
+    // Option 2 is cleaner specially for big pages with a lot locators 
     private readonly formLayoutsMenu: Locator
     private readonly datePickerMenu: Locator
     private readonly toasterMenu: Locator
