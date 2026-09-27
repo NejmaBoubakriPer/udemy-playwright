@@ -1,12 +1,15 @@
 import { Page } from '@playwright/test'
 
-export class PageManagegr{
+export class HelperBase{
 
-    readonly page: Page
+    protected readonly page: Page
     
       constructor(page: Page){
         this.page = page
         }
 
-        
+    protected  async getToasterMessage(){
+            //this is the method
+            return 'this is the message'
+        }
 }

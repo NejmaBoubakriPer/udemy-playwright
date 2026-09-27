@@ -1,8 +1,8 @@
 import { Locator, Page } from "@playwright/test";
 import {step} from "../helpers/test-step-decorator"
-export class NavigationPage{
+import {HelperBase} from './helper-base'
+export class NavigationPage extends HelperBase{
 
-    private readonly page: Page
     // This is the recommended style by playwrghit 
     // Option 2 is to just declare here the page and the others inside the methods 
     // Option 2 is cleaner specially for big pages with a lot locators 
@@ -14,7 +14,7 @@ export class NavigationPage{
 
 
     constructor(page: Page){
-        this.page = page
+        super(page)
         this.formLayoutsMenu = page.getByText('Form Layout')
         this.datePickerMenu = page.getByText('Datepicker')
         this.toasterMenu = page.getByText('Toastr')
