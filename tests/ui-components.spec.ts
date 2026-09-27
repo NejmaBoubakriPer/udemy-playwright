@@ -140,7 +140,7 @@ test.describe('Form Layouts page', () => {
     })
 
 
-      test('Datepicker', async({page}) => {
+    test('Datepicker', async({page}) => {
     await page.getByText('Forms').click()
     await page.getByText('Datepicker').click()
     const calenderInputField = page.getByPlaceholder('Form Picker')

@@ -2,4 +2,5 @@
 # dependencies
 /node_modules
 /test-results
-index.html
+/playwright-report
+/playwright-report/index.html
