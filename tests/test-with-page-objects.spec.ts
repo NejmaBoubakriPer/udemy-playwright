@@ -1,5 +1,6 @@
 import { PageManagegr } from './../page-objects/page-manager';
 import { test } from '@playwright/test'
+import {faker} from '@faker-js/faker'
 
 
 test.beforeEach('Before all Tests',async ({page}) => {
@@ -18,10 +19,15 @@ test ('Navigate to form layout page',async({page})=> {
 
 
 test ('Parametrize page object methods',async({page})=> {
+
   const pageManager = new PageManagegr(page)  
+  const randomFullName = faker.person.fullName()
+  const randomEmail = faker.internet.email({provider: 'test.com'})
+
+
   await pageManager.navigateTo.formLayoutsPage()
-  await pageManager.formLayoutPage.submitUsingTheGridForm('artem@test.com','welcome','Option 1')
-  await pageManager.formLayoutPage.submitInlineForm('Nejma', 'artem@test.com',true)
+  await pageManager.formLayoutPage.submitUsingTheGridForm(`${randomEmail}`,'welcome','Option 1')
+  await pageManager.formLayoutPage.submitInlineForm(`${randomFullName}`, `${randomEmail}`,true)
   await pageManager.navigateTo.datePickerPage()
   await pageManager.datePicker.selectCommunDatePickerFromToday(5)
   await pageManager.datePicker.selectDatePickerWithRangeFromToday(5,10)

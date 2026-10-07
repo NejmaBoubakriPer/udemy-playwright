@@ -1,5 +1,6 @@
 import test from '@playwright/test'
 
+test.describe.configure({retries: 2})
 test.beforeEach('Before all Test Suits',async ({page}) => {
   await page.goto('https://playground.bondaracademy.com')
 })
@@ -8,7 +9,10 @@ test.describe('First test suit Suit1', () => {
     await page.getByText('Forms').click()
   })
 
-  test.skip ('the first test of Suit1', async({page}) => {
+  test.skip ('the first test of Suit1', async({page},testInfo) => {
+    if (testInfo){
+      //Clean up test data
+    }
     await page.getByText('Form Layout').click()
   })
 

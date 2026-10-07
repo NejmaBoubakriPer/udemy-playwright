@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "pageObjects-chrome": "npx playwright test test-with-page-objects.spec.ts --project=chromium",
+    "pageObjects-firefox": "npx playwright test test-with-page-objects.spec.ts --project=firefox",
+    "pageObjects-both": "npm run pageObjects-chrome && npm run pageObjects-firefox"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@faker-js/faker": "^10.6.0",
     "@playwright/test": "^1.61.0",
     "@types/node": "^25.9.3"
   }
