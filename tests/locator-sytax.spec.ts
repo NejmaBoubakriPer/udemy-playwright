@@ -1,6 +1,6 @@
 import test, { expect } from '@playwright/test'
 test.beforeEach('Before all Test Suits',async ({page}) => {
-  await page.goto('https://playground.bondaracademy.com')
+  await page.goto('/')
   await page.getByText('Forms').click()
   await page.getByText('Form Layout').click()
 })

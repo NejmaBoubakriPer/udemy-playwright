@@ -4,3 +4,5 @@
 /test-results
 /playwright-report
 /playwright-report/index.html
+.env
+.env.qa
