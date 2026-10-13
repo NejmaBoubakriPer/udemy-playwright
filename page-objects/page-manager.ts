@@ -3,7 +3,7 @@ import { NavigationPage } from '../page-objects/navigation-page'
 import { FormLayoutsPage } from '../page-objects/form-layouts-page'
 import { DatePickerPage } from '../page-objects/date-picker-page'
 
-export class PageManagegr{
+export class PageManager{
 
     readonly navigateTo:  NavigationPage
     readonly formLayoutPage:  FormLayoutsPage
