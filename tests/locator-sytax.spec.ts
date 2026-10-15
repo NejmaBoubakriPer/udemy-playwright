@@ -28,7 +28,7 @@ test ('Syntax Layout rules',async({page})=> {
 })
 
 
-test('User facing locator',async({page})=>{
+test('User facing locator',{tag:'@smoke'},async({page})=>{
   await page.getByRole('textbox',{name: "Email"}).first().click()
   await page.getByRole('button',{name: "Sign in"}).first().click()
 

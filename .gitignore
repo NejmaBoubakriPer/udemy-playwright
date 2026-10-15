@@ -1,8 +1,7 @@
 
 # dependencies
 /node_modules
-/test-results
-/playwright-report
-/playwright-report/index.html
+playwright-report/
+test-results/
 .env
 .env.qa

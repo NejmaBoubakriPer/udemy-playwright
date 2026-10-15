@@ -3,7 +3,7 @@ import { test } from '../fixture'
 import {faker} from '@faker-js/faker'
 
 
-test ('Navigate to form layout page',async({pageManager})=> {
+test ('Navigate to form layout page',{tag: ['@layout page','@smoke']},async({pageManager})=> {
   await pageManager.navigateTo.formLayoutsPage()
   await pageManager.navigateTo.datePickerPage()
   await pageManager.navigateTo.smartTablePage()
